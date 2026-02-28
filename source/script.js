@@ -1,0 +1,55 @@
+const textToType = "Software & Cybersecurity Engineer";
+const typingElement = document.getElementById("typing-text");
+let i = 0;
+
+function typeWriter() {
+    if (i < textToType.length) {
+        typingElement.innerHTML += textToType.charAt(i);
+        i++;
+        setTimeout(typeWriter, 50); // Speed of typing
+    }
+}
+
+// Start typing slightly after page load
+setTimeout(typeWriter, 500);
+
+// --- Scroll Reveal Logic ---
+
+// Setup the "camera" settings
+const observerOptions = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.15 // Triggers when 15% of the element is visible
+};
+
+// Create the observer
+const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+        // If the element crosses into the screen
+        if (entry.isIntersecting) {
+            entry.target.classList.add('active'); // Add the CSS class to animate it
+            observer.unobserve(entry.target);     // Stop watching it so it only animates once
+        }
+    });
+}, observerOptions);
+
+// Find all elements with the 'reveal' class and tell the observer to watch them
+document.querySelectorAll('.reveal').forEach((element) => {
+    observer.observe(element);
+});
+
+
+// --- Email Copy-to-Clipboard Fallback ---
+// document.querySelector('.btn[href^="mailto"]').addEventListener('click', function (e) {
+//     const email = "madhavramdev6@gmail.com"; // Put your actual email here
+
+//     // Copy to clipboard
+//     navigator.clipboard.writeText(email).then(() => {
+//         // Optional: Change button text temporarily to show it worked
+//         const originalText = this.innerText;
+//         this.innerText = "Email Copied!";
+//         setTimeout(() => {
+//             this.innerText = originalText;
+//         }, 2000);
+//     });
+// });
