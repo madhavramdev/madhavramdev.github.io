@@ -38,6 +38,23 @@ document.querySelectorAll('.reveal').forEach((element) => {
     observer.observe(element);
 });
 
+// --- HAMBURGER MENU LOGIC ---
+const hamburger = document.querySelector('.hamburger');
+const navLinks = document.querySelector('.nav-links');
+const links = document.querySelectorAll('.nav-links li a');
+
+if (hamburger) {
+    hamburger.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+    });
+}
+
+links.forEach(link => {
+    link.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+    });
+});
+
 
 // --- Email Copy-to-Clipboard Fallback ---
 // document.querySelector('.btn[href^="mailto"]').addEventListener('click', function (e) {

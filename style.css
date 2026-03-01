@@ -341,106 +341,89 @@ footer p {
 
 /* MOBILE RESPONSIVENESS
    If the screen is smaller than 768px,
-   it overrides the CSS above it to stack things vertically instead of horizontally.
+   stack things vertically instead of horizontally.
 */
+/* Hide hamburger icon on desktop screens */
+@media (min-width: 769px) {
+    .hamburger {
+        display: none;
+    }
+}
+
+/* ==========================================================================
+   MOBILE LAYOUT & HAMBURGER MENU (Max Width: 768px)
+   ========================================================================== */
 @media (max-width: 768px) {
+
+    /* Stack the image and text vertically */
     .hero-content {
         flex-direction: column;
         text-align: center;
+        gap: 20px;
     }
 
-    .hero h1 {
-        font-size: 2.5rem;
+    .hero-text {
+        width: 100%;
+        padding: 0 15px;
+        box-sizing: border-box;
+    }
+
+    .hero-text h2,
+    .hero-text .typing-container {
+        font-size: 1.5rem;
+        white-space: normal;
+        border-right: none;
+        min-height: auto;
+    }
+
+    .hero-text p {
+        font-size: 0.95rem;
+        margin-bottom: 25px;
+    }
+
+    /* HAMBURGER ICON STYLING */
+    .hamburger {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        cursor: pointer;
+    }
+
+    .hamburger span {
+        width: 28px;
+        height: 3px;
+        background-color: #1d3557;
+        border-radius: 3px;
+        transition: all 0.3s ease;
+    }
+
+    /* SLIDE-DOWN MOBILE MENU */
+    .nav-links {
+        position: absolute;
+        top: 100%;
+        left: -100%;
+        width: 100%;
+        background-color: #f4f1ea;
+        flex-direction: column;
+        padding: 20px 0;
+        border-bottom: 3px solid #e63946;
+        transition: left 0.3s ease;
+        box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav-links.active {
+        left: 0;
+    }
+
+    body {
+        padding-top: 80px;
     }
 }
 
-
-/* ==========================================================================
-   SCROLL REVEAL ANIMATIONS
-   ========================================================================== */
-
-/* The starting state (hidden and pushed down 40px) */
-.reveal {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-/* The ending state (visible and in its normal position) */
-.reveal.active {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* Stagger delays */
-.reveal.delay-1 {
-    transition-delay: 0.1s;
-}
-
-.reveal.delay-2 {
-    transition-delay: 0.2s;
-}
-
-.reveal.delay-3 {
-    transition-delay: 0.3s;
-}
-
-/* ==========================================================================
-   EXPERIENCE TIMELINE
-   ========================================================================== */
-
-.timeline {
-    border-left: 4px solid #e63946;
-    padding-left: 30px;
-    margin-left: 20px;
-    position: relative;
-    max-width: 900px;
-}
-
-.timeline-item {
-    margin-bottom: 45px;
-    position: relative;
-}
-
-.timeline-dot {
-    position: absolute;
-    left: -38px;
-    top: 5px;
-    width: 12px;
-    height: 12px;
-    background-color: #f4f1ea;
-    border: 4px solid #1d3557;
-}
-
-.timeline-date {
-    font-family: var(--font-mono, 'Courier New', monospace);
-    font-size: 0.95rem;
-    color: #e63946;
-    margin-bottom: 8px;
-    font-weight: 700;
-}
-
-/* Job Title and Company */
-.timeline-item h3 {
-    margin-top: 0;
-    margin-bottom: 15px;
-    font-size: 1.4rem;
-    color: #1d3557;
-}
-
-.timeline-item .company {
-    font-weight: 400;
-    opacity: 0.75;
-}
-
-/* Bullet points */
-.timeline-item ul {
-    padding-left: 20px;
-    margin: 0;
-    color: #2b2b2b;
-}
-
-.timeline-item li {
-    margin-bottom: 10px;
-    line-height: 1.6;
+/* GLOBAL OVERFLOW SAFETY */
+/* Locks the page width so it never slides left/right */
+html,
+body {
+    overflow-x: hidden;
+    width: 100%;
 }
