@@ -43,16 +43,30 @@ const hamburger = document.querySelector('.hamburger');
 const navLinks = document.querySelector('.nav-links');
 const links = document.querySelectorAll('.nav-links li a');
 
+// 1. Toggle the menu open/closed when clicking the hamburger icon
 if (hamburger) {
     hamburger.addEventListener('click', () => {
         navLinks.classList.toggle('active');
     });
 }
 
+// 2. Automatically close the menu when a specific link is clicked
 links.forEach(link => {
     link.addEventListener('click', () => {
         navLinks.classList.remove('active');
     });
+});
+
+// 3. Close the menu if the user clicks anywhere outside of it
+document.addEventListener('click', (event) => {
+    if (navLinks.classList.contains('active')) {
+        const isClickInsideMenu = navLinks.contains(event.target);
+        const isClickOnHamburger = hamburger.contains(event.target);
+
+        if (!isClickInsideMenu && !isClickOnHamburger) {
+            navLinks.classList.remove('active');
+        }
+    }
 });
 
 

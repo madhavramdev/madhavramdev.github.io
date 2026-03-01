@@ -124,6 +124,32 @@ body::after {
     /* Hover turns red */
 }
 
+/* 
+   PROJECT SKILL TAGS
+   */
+.project-skills-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 15px;
+    margin-top: -5px;
+}
+
+.project-skill-tag {
+    background-color: #1d3557;
+    /* Retro dark blue background */
+    color: #f4f1ea;
+    /* Cream text */
+    padding: 4px 10px;
+    font-size: 0.8rem;
+    font-family: var(--font-mono, 'Courier New', monospace);
+    border-radius: 3px;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+
 .nav-btn {
     border: 2px solid #1d3557;
     padding: 5px 15px;
@@ -426,7 +452,11 @@ footer p {
 .reveal {
     opacity: 0;
     transform: translateY(40px);
-    transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    /* Only animate opacity and transform so the GPU handles it smoothly */
+    transition: opacity 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+        transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    will-change: opacity, transform;
+    /* Warns the browser to prep for animation */
 }
 
 .reveal.active {
@@ -504,9 +534,10 @@ footer p {
 }
 
 /* GLOBAL OVERFLOW SAFETY */
-/* Locks the page width so it never slides left/right */
-html,
 body {
     overflow-x: hidden;
     width: 100%;
+    position: relative;
 }
+
+/* Removed the 'html' tag from this block to restore native scrolling */
